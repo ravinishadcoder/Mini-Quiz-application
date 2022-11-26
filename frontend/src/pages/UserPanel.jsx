@@ -12,7 +12,7 @@ const UserPanel = () => {
   const [score, setScore] = useState(0);
   const [modalShow, setModalShow] = React.useState(false);
   useEffect(() => {
-    fetch(`http://localhost:8080/question?difficulty=${level}`)
+    fetch(`https://degiaccel-backend.onrender.com/question?difficulty=${level}`)
       .then((res) => res.json())
       .then((d) => {
         setData(d[0]);

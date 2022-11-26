@@ -20,8 +20,10 @@ function AdminPanel() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    setNoOfques(noOfques + 1);
+    axios.post("https://degiaccel-backend.onrender.com/question/create",formData)
+    .then((d)=>{
+      setNoOfques(noOfques + 1);
+    })
   };
   return (
     <Container>
