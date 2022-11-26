@@ -1,0 +1,13 @@
+.home2Box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+
+  height: 92vh;
+}
+.home2SubBox1 {
+  background-color: lightsalmon;
+}
+.home2SubBox2 {
+  background-color: lightblue;
+}
