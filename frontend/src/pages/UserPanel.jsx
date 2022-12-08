@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -10,18 +11,25 @@ const UserPanel = () => {
   const [data, setData] = useState({});
   const [level, setLevel] = useState(5);
   const [score, setScore] = useState(0);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [count, setCount] = useState(1);
+  const [graphData, setGraphData] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
   useEffect(() => {
+    if (level === 10 || level <= 0) {
+      setModalShow(true);
+      return;
+    }
     fetch(`https://degiaccel-backend.onrender.com/question?difficulty=${level}`)
       .then((res) => res.json())
       .then((d) => {
         setData(d[0]);
+        setCount((count) => count + 1);
       });
-      if(level==10||level<0){
-       setModalShow(true)
-      }
   }, [level]);
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    setGraphData([...graphData, { name: "Q" + count, score: score }]);
+  }, [score]);
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let checkboxes = document.getElementsByName("answer");
     let selectedAns = [];
@@ -30,29 +38,25 @@ const UserPanel = () => {
         selectedAns.push(checkbox.value);
       }
     }
-    let correct_ans = data.correct_ans.split(",");
-    // console.log("correct_ans")
-    if (correct_ans.length === selectedAns.length) {
-      let res = true;
-      for (let i = 0; i < selectedAns.length; i++) {
-        if (!correct_ans.includes(selectedAns[i])) {
-          res = false;
-          break;
-        }
-      }
-      if (res) {
-        setScore(score + 5);
-        setLevel(level + 1);
-      } else {
-        setLevel(level - 1);
-        setScore(score - 2);
-      }
+    let userAns = selectedAns.join("");
+    let status = await axios.post(
+      `https://degiaccel-backend.onrender.com/question/checkans/${data._id}`,
+      { userAns }
+    );
+    
+    if (status.data.msg) {
+      setScore(score + 5);
+      setLevel(level + 1);
     } else {
       setLevel(level - 1);
       setScore(score - 2);
     }
+
     document.querySelector(".form").reset();
   };
+  if (data.question === undefined) {
+    return <h3>Please wait...</h3>;
+  }
   return (
     <Container style={{ border: "1px solid black", padding: "5px" }}>
       <h2>Your Score:{score}</h2>
@@ -82,8 +86,13 @@ const UserPanel = () => {
           Next Question
         </Button>
       </Form>
-     
-      <Model show={modalShow} score={score} onHide={() => setModalShow(false)} />
+
+      <Model
+        show={modalShow}
+        score={score}
+        data={graphData}
+        onHide={() => setModalShow(false)}
+      />
     </Container>
   );
 };
