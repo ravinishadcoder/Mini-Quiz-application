@@ -19,7 +19,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("https://degiaccel-backend.onrender.com/login", cred);
+      const { data } = await axios.post("https://quiz-applications.vercel.app/login", cred);
       setCredData({
         ...credData,
         token: data.token,
@@ -32,7 +32,7 @@ function Login() {
         navigate("/user");
       }
     } catch (e) {
-      console.log(e);
+      
       setError(true);
     }
   };

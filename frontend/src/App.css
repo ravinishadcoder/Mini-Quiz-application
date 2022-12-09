@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@200;300&family=Asap&family=Roboto&display=swap');
 .App {
   text-align: center;
   background-color: lightgray;
+  font-family: Roboto;
   height: 100vh;
 }
 
@@ -96,7 +98,9 @@
 .logText:hover{
   color: white;
 }
-
+.navlogo{
+font-weight: bold;
+}
 /* medium secreen */
 
 @media only screen and (max-width: 768px) {

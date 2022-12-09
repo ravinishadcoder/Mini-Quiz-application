@@ -2,13 +2,13 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
-import "../App.css";
-import axios from "axios";
+import "../App.css"
+import axios from "axios"
 function AdminPanel() {
   const [formData, setFormData] = useState({
     question: "",
     correct_ans: "",
-    difficulty: "",
+    difficulty:"",
     opt1: "",
     opt2: "",
     opt3: "",
@@ -21,21 +21,19 @@ function AdminPanel() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    axios
-      .post("https://degiaccel-backend.onrender.com/question/create", formData)
-      .then((d) => {
-        setNoOfques(noOfques + 1);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+   
+    axios.post("https://quiz-applications.vercel.app/question/create",formData)
+    .then((d)=>{
+      setNoOfques(noOfques + 1);
+    })
+    .catch((e)=>{
+      console.log(e)
+    })
+   
   };
   return (
     <Container className="Box">
-      <h2 className="txtHead">
-        Question Added:<span className="txtSpan">{noOfques}</span>
-      </h2>
+      <h2 >Question Added:<span className="txtSpan">{noOfques}</span></h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Control

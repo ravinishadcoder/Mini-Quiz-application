@@ -15,16 +15,15 @@ const UserPanel = () => {
   const [graphData, setGraphData] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   useEffect(() => {
-    if (level === 10 || level <= 0||count>=10) {
+    if (level === 10 || level <= 0 || count >= 10) {
       setModalShow(true);
       return;
     }
-    fetch(`https://degiaccel-backend.onrender.com/question?difficulty=${level}`)
+    fetch(`https://quiz-applications.vercel.app/question?difficulty=${level}`)
       .then((res) => res.json())
       .then((d) => {
         setData(d[0]);
         setCount((count) => count + 1);
-        
       });
   }, [level]);
   useEffect(() => {
@@ -40,12 +39,13 @@ const UserPanel = () => {
       }
     }
     let userAns = selectedAns.join();
+    
     let status = await axios.post(
-      `http://localhost:8080/question/checkans/${data._id}`,
+      `https://quiz-applications.vercel.app/question/checkans/${data._id}`,
       { userAns }
     );
 
-    // console.log(userAns);
+    
     if (status.data.msg) {
       setScore(score + 5);
       setLevel(level + 1);

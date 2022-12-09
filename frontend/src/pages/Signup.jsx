@@ -15,7 +15,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await axios.post("https://degiaccel-backend.onrender.com/signup", cred);
+      const data = await axios.post("https://quiz-applications.vercel.app/signup", cred);
       navigate("/login");
     } catch (e) {
       setError(true);
