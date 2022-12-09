@@ -2,7 +2,7 @@
 
 Backend Link :-
 
-https://degiaccel-backend.onrender.com/question?difficulty=5
+https://quiz-applications.vercel.app/question?difficulty=5
 
 Deployment Link :-
 
