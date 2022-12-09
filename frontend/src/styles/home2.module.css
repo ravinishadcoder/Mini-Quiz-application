@@ -1,13 +1,36 @@
+/* 
+*{
+  background-color: lightgray;
+} */
 .home2Box {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 40%);
   justify-content: center;
-
-  height: 92vh;
+  gap: 5px;
+  margin-top: 10%;
+ 
 }
+
 .home2SubBox1 {
-  background-color: lightsalmon;
+  background-color: lightsalmon ;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
 }
 .home2SubBox2 {
+  padding: 15px;
   background-color: lightblue;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+/* style={{ width: "40%", margin: "auto", textAlign: "start" }} */
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .home2Box {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10%;
+   
+  }
 }

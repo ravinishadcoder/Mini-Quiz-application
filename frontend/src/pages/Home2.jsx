@@ -1,4 +1,3 @@
-
 import AdminDes from "../components/AdminDes";
 import UserDes from "../components/UserDes";
 import styles from "../styles/home2.module.css";

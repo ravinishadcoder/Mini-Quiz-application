@@ -1,5 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useNavigate } from "react-router-dom";
 import {
   CartesianGrid,
   Line,
@@ -11,6 +12,10 @@ import {
 
 function Model(props) {
   const data = props.data;
+  const navigate=useNavigate()
+  const handleClose=()=>{
+    navigate("/")
+  }
   return (
     <Modal
       {...props}
@@ -58,7 +63,7 @@ function Model(props) {
         </LineChart>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={handleClose}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
