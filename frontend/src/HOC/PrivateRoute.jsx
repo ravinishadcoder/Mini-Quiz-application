@@ -6,7 +6,7 @@ const PrivateRoute = ({ children }) => {
   const {credData}=useContext(AuthContext)
   
   if (!credData.isAuth) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/signup" />;
   } else {
     return children;
   }

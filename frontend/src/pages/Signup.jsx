@@ -3,10 +3,12 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import { AiFillEye,AiFillEyeInvisible} from 'react-icons/ai';
 import "../App.css";
 function Signup() {
   const [cred, setCred] = useState({ role: "", email: "", password: "" });
   const [error, setError] = useState(false);
+  const [hide,setHide]=useState(true)
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,6 +23,9 @@ function Signup() {
       setError(true);
     }
   };
+  const handleShowPass=()=>{
+   setHide(!hide)
+  }
   return (
     <div className="signupBox">
       <h3 style={{ textAlign: "center" }}>Signup</h3>
@@ -52,12 +57,14 @@ function Signup() {
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
-            type="password"
+            type={hide?"password":"text"}
             name="password"
+            minLength="4"
             value={cred.password}
             onChange={handleChange}
             placeholder="Password"
           />
+          <span className="eyeicon" onClick={handleShowPass}>{hide?<AiFillEye/>:<AiFillEyeInvisible/>}</span>
         </Form.Group>
         <Form.Group>
           {error && <span className="warning">user already exists</span>}
